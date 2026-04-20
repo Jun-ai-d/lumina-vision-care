@@ -6,11 +6,11 @@ import Image from "next/image";
 import { FocusReveal } from "./FocusReveal";
 
 const differentiators = [
-    { icon: Clock, title: "Ample Time", desc: "She believes in spending ample time with each patient to deliver personalized, thorough care." },
+    { icon: Clock, title: "Ample Time", desc: "We believe in spending ample time with each patient to deliver personalized, thorough care." },
     { icon: Smartphone, title: "Latest Technology", desc: "We offer patients the latest in lens technology, including high-definition digital lenses." },
     { icon: ShieldCheck, title: "Insurance Accepted", desc: "Participating provider in most insurance plans for your convenience." },
-    { icon: Gem, title: "Women-Owned", desc: "Proudly women-owned business serving the Abington community." },
-    { icon: Car, title: "Easy Access", desc: "Accessible via SEPTA bus route 55 and Regional Rail West Trenton Line with ample parking." },
+    { icon: Gem, title: "Premium Care", desc: "Dedicated to providing the highest standard of vision care and style." },
+    { icon: Car, title: "Easy Access", desc: "Conveniently located with ample parking and easy transit access." },
     { icon: Glasses, title: "Designer Brands", desc: "Browse our handpicked collection of designer frames and premium sunglasses." },
 ];
 
@@ -20,7 +20,7 @@ export default function WhyChooseUs() {
             {/* Full background image with dark overlay */}
             <div className="absolute inset-0">
                 <Image
-                    src="/images/hero-bg.jpg.png"
+                    src="/images/v2_hero_new.png"
                     alt=""
                     fill
                     sizes="100vw"
@@ -41,7 +41,7 @@ export default function WhyChooseUs() {
                     </span>
                     <h2 className="text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl font-serif font-extrabold text-white mb-6 leading-tight">
                         Why Choose{" "}
-                        <span className="text-gradient-accent">Wink Eye Care?</span>
+                        <span className="text-gradient-accent">Us?</span>
                     </h2>
                     <p className="text-lg text-primary-100/60 leading-relaxed">
                         Providing patients with high quality eye exams, eyeglasses, and contact lenses with a personal touch.

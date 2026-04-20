@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { m, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, Mail, MapPin } from "lucide-react";
+import { MapPin, Phone, Mail, Menu, X } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
+import { siteConfig } from "@/config/site";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -41,14 +42,14 @@ export default function Navbar() {
             {/* Top Utility Bar */}
             <div className={`hidden md:flex bg-surface-dark text-white/80 text-[13px] py-2 px-6 justify-between items-center transition-all duration-500 ${scrolled ? "opacity-0 h-0 py-0 overflow-hidden" : "opacity-100"}`}>
                 <div className="flex space-x-6 items-center max-w-7xl mx-auto w-full">
-                    <a href="tel:215-935-6320" className="flex items-center gap-2 hover:text-white transition-colors">
-                        <Phone size={13} className="text-accent" /> 215-935-6320
+                    <a href={`tel:${siteConfig.contact.phone.replace(/-/g, '')}`} className="flex items-center gap-2 hover:text-white transition-colors">
+                        <Phone size={13} className="text-accent" /> {siteConfig.contact.phone}
                     </a>
-                    <a href="mailto:winkeyecare20@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors">
-                        <Mail size={13} className="text-accent" /> winkeyecare20@gmail.com
+                    <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-2 hover:text-white transition-colors">
+                        <Mail size={13} className="text-accent" /> {siteConfig.contact.email}
                     </a>
                     <span className="flex items-center gap-2">
-                        <MapPin size={13} className="text-accent" /> Abington, PA
+                        <MapPin size={13} className="text-accent" /> {siteConfig.contact.address.city}, {siteConfig.contact.address.state}
                     </span>
                 </div>
             </div>
@@ -61,11 +62,11 @@ export default function Navbar() {
                     : "bg-white/90 backdrop-blur-lg shadow-[0_4px_24px_rgba(0,0,0,0.08)] border border-white/50"
                 }`}>
                 <Link href="/" className="flex items-center gap-1.5 relative z-10">
-                    <span className={`text-[28px] font-serif font-extrabold tracking-tight transition-colors duration-500 ${pastHero ? "text-white" : "text-primary-800"}`}>
-                        wink
+                    <span className={`text-[23px] sm:text-[28px] font-serif font-extrabold tracking-tight transition-colors duration-500 ${pastHero ? "text-white" : "text-primary-800"}`}>
+                        {siteConfig.name.split(" ")[0].toLowerCase()}
                     </span>
-                    <span className={`text-[13px] italic font-light tracking-wide transition-colors duration-500 ${pastHero ? "text-white/70" : "text-primary-500"}`}>
-                        eye care & optical
+                    <span className={`text-[11px] sm:text-[13px] italic font-light tracking-wide transition-colors duration-500 ${pastHero ? "text-white/70" : "text-primary-500"}`}>
+                        {siteConfig.name.split(" ").slice(1).join(" ").toLowerCase()}
                     </span>
                 </Link>
 
@@ -82,7 +83,7 @@ export default function Navbar() {
                         </Link>
                     ))}
                     <MagneticButton
-                        href="https://calendar.app.google/Ke2Rg6r8pgH8d5MCA"
+                        href={siteConfig.links.booking}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`ml-3 px-6 py-2.5 rounded-full font-bold text-[13px] duration-300 ${pastHero ? "bg-white text-primary-800 shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:shadow-[0_6px_25px_rgba(255,255,255,0.35)]" : "bg-primary-600 text-white shadow-[0_4px_20px_rgba(10,126,154,0.25)] hover:shadow-[0_6px_25px_rgba(10,126,154,0.4)] hover:bg-primary-700"}`}
@@ -128,7 +129,7 @@ export default function Navbar() {
                             </m.div>
                         ))}
                         <a
-                            href="https://calendar.app.google/Ke2Rg6r8pgH8d5MCA"
+                            href={siteConfig.links.booking}
                             className="w-full py-4 rounded-full bg-primary-600 text-white font-bold flex justify-center mt-4 shadow-lg"
                             target="_blank" rel="noopener noreferrer"
                         >

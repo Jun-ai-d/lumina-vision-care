@@ -4,6 +4,7 @@ import { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle, AlertCircle, Phone, Mail, MapPin, Clock } from "lucide-react";
 import Image from "next/image";
+import { siteConfig } from "@/config/site";
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -85,8 +86,8 @@ export default function ContactForm() {
                             className="relative w-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-primary-100/50 min-h-[220px] sm:min-h-[400px]"
                         >
                             <Image
-                                src="/images/Building exterior.png"
-                                alt="Wink Eye Care Clinic Exterior"
+                                src="/images/v2_hero_new.png"
+                                alt={`${siteConfig.name} Clinic Exterior`}
                                 fill
                                 sizes="(max-width: 1024px) 100vw, 50vw"
                                 className="object-cover hover:scale-105 transition-transform duration-1000"
@@ -111,7 +112,7 @@ export default function ContactForm() {
                                         </div>
                                         <div className="pt-0.5">
                                             <p className="font-bold text-primary-900 text-base mb-1">Address</p>
-                                            <p className="text-text-muted text-sm leading-relaxed">1151 Old York Rd, Suite 103<br />Abington, PA 19001</p>
+                                            <p className="text-text-muted text-sm leading-relaxed">{siteConfig.contact.address.street}<br />{siteConfig.contact.address.city}, {siteConfig.contact.address.state} {siteConfig.contact.address.zip}</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-5 items-start group">
@@ -120,7 +121,7 @@ export default function ContactForm() {
                                         </div>
                                         <div className="pt-0.5">
                                             <p className="font-bold text-primary-900 text-base mb-1">Phone</p>
-                                            <a href="tel:215-935-6320" className="text-text-muted text-sm hover:text-primary-600 transition-colors">215-935-6320</a>
+                                            <a href={`tel:${siteConfig.contact.phone.replace(/-/g, '')}`} className="text-text-muted text-sm hover:text-primary-600 transition-colors">{siteConfig.contact.phone}</a>
                                         </div>
                                     </div>
                                     <div className="flex gap-5 items-start group">
@@ -129,7 +130,7 @@ export default function ContactForm() {
                                         </div>
                                         <div className="pt-0.5">
                                             <p className="font-bold text-primary-900 text-base mb-1">Email</p>
-                                            <a href="mailto:winkeyecare20@gmail.com" className="text-text-muted text-sm hover:text-primary-600 transition-colors break-all">winkeyecare20@gmail.com</a>
+                                            <a href={`mailto:${siteConfig.contact.email}`} className="text-text-muted text-sm hover:text-primary-600 transition-colors break-all">{siteConfig.contact.email}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -144,18 +145,10 @@ export default function ContactForm() {
                                     <h3 className="font-serif font-bold text-2xl text-primary-900">Office Hours</h3>
                                 </div>
                                 <div className="space-y-3.5 text-[15px]">
-                                    {[
-                                        { day: "Monday", hours: "10:00 AM – 6:00 PM" },
-                                        { day: "Tuesday", hours: "11:00 AM – 7:00 PM" },
-                                        { day: "Wednesday", hours: "11:00 AM – 6:00 PM" },
-                                        { day: "Thursday", hours: "Closed" },
-                                        { day: "Friday", hours: "9:30 AM – 5:00 PM" },
-                                        { day: "Saturday", hours: "Every other Sat: 9 AM – 3 PM" },
-                                        { day: "Sunday", hours: "Closed" },
-                                    ].map((item, i) => (
-                                        <div key={i} className={`flex justify-between py-1 ${item.hours === "Closed" ? "text-text-light" : "text-text-main"}`}>
+                                        {siteConfig.hours.map((item, i) => (
+                                        <div key={i} className={`flex justify-between py-1 ${item.time === "Closed" ? "text-text-light" : "text-text-main"}`}>
                                             <span className="font-semibold">{item.day}</span>
-                                            <span className="text-text-muted">{item.hours}</span>
+                                            <span className="text-text-muted">{item.time}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -181,7 +174,7 @@ export default function ContactForm() {
                                 <h3 className="font-serif font-bold text-2xl text-primary-900">Parking & Public Transportation</h3>
                             </div>
                             <p className="text-text-main text-base leading-relaxed font-medium">
-                                Accessible via SEPTA bus route 55 and Regional Rail West Trenton Line to the Noble Station. Free parking widely available.
+                                Conveniently located with ample free parking spaces. Easily accessible by local public transportation networks.
                             </p>
                         </m.div>
 
@@ -193,7 +186,7 @@ export default function ContactForm() {
                             transition={{ delay: 0.2 }}
                         >
                             <a
-                                href="https://maps.google.com/?q=1151+Old+York+Rd+Suite+103+Abington+PA+19001"
+                                href={siteConfig.links.googleMaps}
                                 target="_blank" rel="noopener noreferrer"
                                 className="block rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 group relative w-full h-full min-h-[250px] border border-primary-100/50"
                             >
@@ -203,10 +196,10 @@ export default function ContactForm() {
                                     </span>
                                 </div>
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3046.0!2d-75.119!3d40.113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6b0!2s1151+Old+York+Rd+Abington+PA!5e0!3m2!1sen!2sus!4v1"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.25280004565!2d-74.14448744400494!3d40.69763123805822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1"
                                     className="w-full h-full pointer-events-none"
                                     loading="lazy"
-                                    title="Wink Eye Care Location"
+                                    title={`${siteConfig.name} Location`}
                                 />
                             </a>
                         </m.div>
@@ -247,7 +240,7 @@ export default function ContactForm() {
                                         type="tel" name="phone" required
                                         value={formData.phone} onChange={handleChange}
                                         className="w-full bg-[#f5f8fa] border border-primary-100 px-6 py-4 rounded-2xl outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 focus:bg-white transition-all duration-300 text-primary-900 placeholder:text-text-light text-[15px]"
-                                        placeholder="215-555-0000"
+                                        placeholder="212-555-0100"
                                     />
                                 </div>
                                 <div>

@@ -1,32 +1,42 @@
+import { siteConfig } from "@/config/site";
+
 export function LocalBusinessSchema() {
     const schema = {
         "@context": "https://schema.org",
         "@type": "Optician",
-        "name": "Wink Eye Care & Optical",
-        "image": "https://www.winkeyecareoptical.com/images/logo.png",
-        "url": "https://www.winkeyecareoptical.com/",
-        "telephone": "215-935-6320",
-        "email": "winkeyecare20@gmail.com",
+        "name": siteConfig.name,
+        "image": `${siteConfig.url}/images/v2_logo.png`,
+        "url": siteConfig.url,
+        "telephone": siteConfig.contact.phone,
+        "email": siteConfig.contact.email,
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "1151 Old York Rd, Suite 103",
-            "addressLocality": "Abington",
-            "addressRegion": "PA",
-            "postalCode": "19001",
+            "streetAddress": siteConfig.contact.address.street,
+            "addressLocality": siteConfig.contact.address.city,
+            "addressRegion": siteConfig.contact.address.state,
+            "postalCode": siteConfig.contact.address.zip,
             "addressCountry": "US"
         },
         "geo": {
             "@type": "GeoCoordinates",
-            "latitude": 40.1158103,
-            "longitude": -75.1207733
+            "latitude": siteConfig.contact.address.coords.lat,
+            "longitude": siteConfig.contact.address.coords.lng
         },
-        "openingHoursSpecification": [
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday"], "opens": "10:00", "closes": "18:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday"], "opens": "11:00", "closes": "19:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday"], "opens": "11:00", "closes": "18:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday"], "opens": "09:30", "closes": "17:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday"], "description": "Every other Saturday", "opens": "09:00", "closes": "15:00" }
-        ],
+        "openingHoursSpecification": siteConfig.hours.map(h => {
+            const [opens, closes] = h.time === "Closed" ? ["00:00", "00:00"] : h.time.split(" - ").map(t => {
+                const [time, period] = t.split(" ");
+                let [hours, mins] = time.split(":").map(Number);
+                if (period === "PM" && hours !== 12) hours += 12;
+                if (period === "AM" && hours === 12) hours = 0;
+                return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+            });
+            return {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [h.day],
+                "opens": opens,
+                "closes": closes
+            };
+        }).filter(h => h.opens !== "00:00"),
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.8",
@@ -37,16 +47,13 @@ export function LocalBusinessSchema() {
     const personSchema = {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Dr. Minal Patel",
-        "jobTitle": "Optometrist",
+        "name": siteConfig.doctor.name,
+        "jobTitle": siteConfig.doctor.title,
         "worksFor": {
             "@type": "Organization",
-            "name": "Wink Eye Care & Optical"
+            "name": siteConfig.name
         },
-        "alumniOf": [
-            { "@type": "EducationalOrganization", "name": "Temple University" },
-            { "@type": "EducationalOrganization", "name": "Pennsylvania College of Optometry at Salus University" }
-        ]
+        "alumniOf": []
     };
 
     return (

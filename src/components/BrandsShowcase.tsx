@@ -3,6 +3,7 @@
 import { m } from "framer-motion";
 import Image from "next/image";
 import { FocusReveal } from "./FocusReveal";
+import { siteConfig } from "@/config/site";
 
 const brands = [
     { name: "Bebe", logo: "bebe-logo.png" },
@@ -30,7 +31,7 @@ export default function BrandsShowcase() {
             <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
                 <Image
                     src="/images/eyeglasses-display.png"
-                    alt="Wink Eye Care Interior"
+                    alt={`${siteConfig.name} Interior`}
                     fill
                     sizes="100vw"
                     className="object-cover object-center"

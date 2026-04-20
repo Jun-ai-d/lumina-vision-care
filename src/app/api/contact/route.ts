@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { siteConfig } from '@/config/site';
 
 export async function POST(req: Request) {
     try {
@@ -36,18 +37,18 @@ export async function POST(req: Request) {
 
         // Email 1: Clinic notification
         const clinicEmailPromise = transporter.sendMail({
-            from: `"Wink Eye Care Website" <${process.env.SMTP_USER}>`,
+            from: `"${siteConfig.name} Website" <${process.env.SMTP_USER}>`,
             to: process.env.SMTP_TO || process.env.SMTP_USER,
             replyTo: email,
             subject: `New Contact Form Submission: ${subject}`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e0e0e0; border-radius: 12px;">
-                    <h2 style="color: #022a35; margin-bottom: 4px;">New Message from Wink Eye Care Website</h2>
+                    <h2 style="color: #022a35; margin-bottom: 4px;">New Message from ${siteConfig.name} Website</h2>
                     <p style="color: #888; font-size: 13px; margin-bottom: 24px;">Submitted via the contact form</p>
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
                             <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: bold; color: #022a35; width: 130px;">Name</td>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #333;">${name}</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; color: #333;">\${name}</td>
                         </tr>
                         <tr>
                             <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-weight: bold; color: #022a35;">Email</td>
@@ -64,30 +65,30 @@ export async function POST(req: Request) {
                     </table>
                     <div style="margin-top: 20px;">
                         <p style="font-weight: bold; color: #022a35; margin-bottom: 8px;">Message</p>
-                        <div style="background: #f8fafb; border-left: 4px solid #0a7e9a; border-radius: 6px; padding: 16px; color: #333; line-height: 1.7; white-space: pre-wrap;">${message}</div>
+                        <div style="background: #f8fafb; border-left: 4px solid #0a7e9a; border-radius: 6px; padding: 16px; color: #333; line-height: 1.7; white-space: pre-wrap;">\${message}</div>
                     </div>
-                    <p style="margin-top: 24px; color: #aaa; font-size: 12px; text-align: center;">Wink Eye Care &amp; Optical · 1151 Old York Rd, Suite 103, Abington, PA 19001</p>
+                    <p style="margin-top: 24px; color: #aaa; font-size: 12px; text-align: center;">${siteConfig.name} · ${siteConfig.contact.address.street}, ${siteConfig.contact.address.city}, ${siteConfig.contact.address.state} ${siteConfig.contact.address.zip}</p>
                 </div>
             `,
         });
 
         // Email 2: Confirmation to the patient
         const confirmationEmailPromise = transporter.sendMail({
-            from: `"Wink Eye Care & Optical" <${process.env.SMTP_USER}>`,
+            from: `"${siteConfig.name}" <${process.env.SMTP_USER}>`,
             to: email,
-            subject: `We received your message — Wink Eye Care & Optical`,
+            subject: `We received your message — ${siteConfig.name}`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0; border-radius: 16px; overflow: hidden; border: 1px solid #e0e0e0;">
                     <!-- Header -->
                     <div style="background: #022a35; padding: 32px 32px 24px; text-align: center;">
-                        <p style="color: #ffffff; font-size: 28px; font-weight: 900; margin: 0; letter-spacing: -0.5px;">wink</p>
-                        <p style="color: #7ec8d8; font-size: 13px; margin: 4px 0 0; font-style: italic;">eye care &amp; optical</p>
+                        <p style="color: #ffffff; font-size: 28px; font-weight: 900; margin: 0; letter-spacing: -0.5px;">${siteConfig.name.split(" ")[0].toLowerCase()}</p>
+                        <p style="color: #7ec8d8; font-size: 13px; margin: 4px 0 0; font-style: italic;">${siteConfig.name.split(" ").slice(1).join(" ").toLowerCase()}</p>
                     </div>
                     <!-- Body -->
                     <div style="padding: 32px;">
-                        <h2 style="color: #022a35; font-size: 22px; margin-bottom: 8px;">Hi ${name}, we got your message! 👋</h2>
+                        <h2 style="color: #022a35; font-size: 22px; margin-bottom: 8px;">Hi \${name}, we got your message! 👋</h2>
                         <p style="color: #555; line-height: 1.7; margin-bottom: 20px;">
-                            Thank you for reaching out to Wink Eye Care &amp; Optical. A member of our team will review your inquiry and get back to you as soon as possible — usually within <strong>1 business day</strong>.
+                            Thank you for reaching out to ${siteConfig.name}. A member of our team will review your inquiry and get back to you as soon as possible — usually within <strong>1 business day</strong>.
                         </p>
                         <!-- Summary box -->
                         <div style="background: #f8fafb; border-radius: 10px; padding: 20px; margin-bottom: 24px; border: 1px solid #e8f0f2;">
@@ -99,19 +100,19 @@ export async function POST(req: Request) {
                         </div>
                         <!-- CTA -->
                         <div style="text-align: center; margin-bottom: 28px;">
-                            <a href="https://calendar.app.google/Ke2Rg6r8pgH8d5MCA"
+                            <a href="\${siteConfig.links.booking}"
                                style="display: inline-block; background: #022a35; color: #ffffff; font-weight: bold; font-size: 15px; padding: 14px 32px; border-radius: 50px; text-decoration: none;">
                                 Schedule Appointment Online →
                             </a>
                         </div>
                         <p style="color: #888; font-size: 13px; line-height: 1.6;">
-                            Prefer to call? Reach us at <a href="tel:215-935-6320" style="color: #0a7e9a;">215-935-6320</a><br>
-                            or email <a href="mailto:winkeyecare20@gmail.com" style="color: #0a7e9a;">winkeyecare20@gmail.com</a>
+                            Prefer to call? Reach us at <a href="tel:\${siteConfig.contact.phone.replace(/-/g, '')}" style="color: #0a7e9a;">\${siteConfig.contact.phone}</a><br>
+                            or email <a href="mailto:\${siteConfig.contact.email}" style="color: #0a7e9a;">\${siteConfig.contact.email}</a>
                         </p>
                     </div>
                     <!-- Footer -->
                     <div style="background: #f0f5f6; padding: 16px 32px; text-align: center;">
-                        <p style="color: #aaa; font-size: 11px; margin: 0;">1151 Old York Rd, Suite 103 · Abington, PA 19001</p>
+                        <p style="color: #aaa; font-size: 11px; margin: 0;">\${siteConfig.contact.address.street} · \${siteConfig.contact.address.city}, \${siteConfig.contact.address.state} \${siteConfig.contact.address.zip}</p>
                     </div>
                 </div>
             `,
@@ -130,7 +131,7 @@ export async function POST(req: Request) {
         await Promise.all([clinicEmailPromise, confirmationEmailPromise, sheetsPromise]);
 
         return NextResponse.json(
-            { success: true, message: "Thank you for contacting Wink Eye Care. We will follow up with you shortly." },
+            { success: true, message: `Thank you for contacting ${siteConfig.name}. We will follow up with you shortly.` },
             { status: 200 }
         );
 

@@ -1,9 +1,9 @@
 "use client";
 
 import { m } from "framer-motion";
-import { GraduationCap, Award, Stethoscope } from "lucide-react";
 import Image from "next/image";
 import { FocusReveal } from "./FocusReveal";
+import { siteConfig } from "@/config/site";
 
 export default function AboutDoctor() {
     return (
@@ -26,11 +26,11 @@ export default function AboutDoctor() {
                     <div className="absolute -inset-4 md:-inset-6 glass rounded-[3rem] -rotate-2 z-0 opacity-60" />
                     <div className="absolute -inset-4 md:-inset-6 bg-gradient-to-br from-primary-100/30 to-accent/10 rounded-[3rem] rotate-2 z-0 blur-sm" />
 
-                    {/* Main Image — doctor.jpg.png */}
+                    {/* Main Image */}
                     <div className="relative aspect-[3/4] sm:aspect-[4/5] overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl z-10">
                         <Image
-                            src="/images/doctor.jpg.png"
-                            alt="Dr. Minal Patel - Optometrist"
+                            src="/images/v2_doctor_portrait.png"
+                            alt={`${siteConfig.doctor.name} - ${siteConfig.doctor.title}`}
                             fill
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 45vw"
                             className="object-cover hover:scale-105 transition-transform duration-1000"
@@ -46,7 +46,7 @@ export default function AboutDoctor() {
                         transition={{ delay: 0.5, duration: 0.5 }}
                         className="absolute -right-4 lg:-right-10 bottom-16 glass-strong px-7 py-5 rounded-3xl shadow-xl z-20 animate-float hidden sm:block"
                     >
-                        <h4 className="text-4xl font-serif font-extrabold text-gradient-primary">18+</h4>
+                        <h4 className="text-4xl font-serif font-extrabold text-gradient-primary">{siteConfig.doctor.experience.replace(' Years', '')}</h4>
                         <p className="text-[10px] font-bold text-text-muted mt-1 tracking-[0.15em] uppercase">Years<br />Experience</p>
                     </m.div>
                 </m.div>
@@ -58,23 +58,23 @@ export default function AboutDoctor() {
                             Our Doctor
                         </span>
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-primary-900 mb-4 sm:mb-5 leading-tight">
-                            Meet Wink Optometrist<br />
-                            <span className="text-gradient-primary">Dr. Minal Patel</span>
+                            Meet Our Optometrist<br />
+                            <span className="text-gradient-primary">{siteConfig.doctor.name}</span>
                         </h2>
                         <div className="w-16 h-1 bg-gradient-to-r from-accent to-accent-gold rounded-full mb-7" />
 
                         <div className="space-y-3 sm:space-y-5 text-text-muted leading-relaxed text-[13px] sm:text-[15px]">
                             <p>
-                                Dr. Minal Patel is a licensed therapeutic optometrist with over 18 years of clinical experience. She has extensive expertise in contact lenses, glaucoma management, dry eye treatment, myopia management, and the co-management of refractive (LASIK) and cataract surgeries. She is also certified in orthokeratology.
+                                {siteConfig.doctor.name} is a licensed therapeutic optometrist with extensive clinical experience. She specializes in contact lenses, glaucoma management, dry eye treatment, and comprehensive eye exams tailored to each patient's individual lifestyle and needs.
                             </p>
                             <p>
-                                Dr. Minal Patel is the owner of Wink Eye Care and Optical. She earned her Bachelor of Science degree and a degree in Business Administration from Temple University and completed her Doctor of Optometry at the Pennsylvania College of Optometry at Salus University in Jenkintown, PA. She completed a primary care externship at The Eye Institute in Philadelphia and further advanced her clinical training through an ocular disease externship at Omni Eye Care in Atlanta, GA.
+                                She earned her Bachelor of Science degree and Doctor of Optometry from leading institutions, followed by advanced clinical training through ocular disease externships. She is passionate about staying current with the latest technologies in vision care.
                             </p>
                             <p>
-                                Dr. Patel is passionate about providing exceptional, personalized eye care. She believes in spending ample time with each patient and performing thorough, comprehensive eye examinations. Her philosophy of care focuses not only on correcting vision, but on identifying and treating the underlying root causes of eye conditions to support long-term eye health.
+                                {siteConfig.doctor.name} is dedicated to providing exceptional, personalized eye care. She believes in spending ample time with each patient to ensure thorough examinations and finding the perfect treatment plan for long-term eye health and clear vision.
                             </p>
                             <p>
-                                Outside of the office, Dr. Patel enjoys painting, staying active through fitness and workouts, watching football and basketball, and exploring new restaurants with her husband.
+                                Outside the clinic, she enjoys staying active, traveling, and exploring the local culinary scene with her family.
                             </p>
                         </div>
                     </div>
@@ -82,11 +82,11 @@ export default function AboutDoctor() {
                     {/* CTA */}
                     <div className="pt-3">
                         <a
-                            href="https://calendar.app.google/Ke2Rg6r8pgH8d5MCA"
+                            href={siteConfig.links.booking}
                             className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-primary-900 text-white font-bold rounded-full hover:bg-primary-700 transition-all duration-300 shadow-[0_8px_30px_rgba(2,42,53,0.3)] hover:shadow-[0_12px_40px_rgba(2,42,53,0.45)] hover:-translate-y-1 active:translate-y-0 text-[15px]"
                             target="_blank" rel="noopener noreferrer"
                         >
-                            Book with Dr. Patel
+                            Book with {siteConfig.doctor.name.split(' ')[0]} {siteConfig.doctor.name.split(' ').pop()}
                         </a>
                     </div>
                 </FocusReveal>

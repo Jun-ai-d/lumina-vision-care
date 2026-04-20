@@ -4,14 +4,8 @@ import { m, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { Calendar, Phone, ChevronDown } from "lucide-react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { MagneticButton } from "./MagneticButton";
-
-const images = [
-    "/images/dr-patel-clinic.png",
-    "/images/hero-bg.jpg.png",
-    "/images/dr-patel-slit-lamp.png"
-];
+import { siteConfig } from "@/config/site";
 
 /* ── animation variants ── */
 const fadeUp: Variants = {
@@ -24,40 +18,27 @@ const fadeUp: Variants = {
 };
 
 export default function Hero() {
-    const [currentImg, setCurrentImg] = useState(0);
-
-    // Auto-advance the slider every 5 seconds
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentImg((prev) => (prev + 1) % images.length);
-        }, 5000);
-        return () => clearInterval(timer);
-    }, []);
 
     return (
         <section id="home" className="relative h-[100dvh] min-h-[600px] flex flex-col justify-center overflow-hidden bg-primary-900">
 
-            {/* ── Background Slider ── */}
+            {/* ── Hero Background ── */}
             <div className="absolute inset-0 z-0">
-                <AnimatePresence mode="wait">
-                    <m.div
-                        key={currentImg}
-                        initial={{ opacity: 0, scale: 1.05 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, transition: { duration: 1.5 } }}
-                        transition={{ duration: 1.5, ease: "easeInOut" }}
-                        className="absolute inset-0 w-full h-full"
-                    >
-                        <Image
-                            src={images[currentImg]}
-                            alt="Wink Eye Care Clinic"
-                            fill
-                            priority
-                            sizes="100vw"
-                            className="object-cover object-center"
-                        />
-                    </m.div>
-                </AnimatePresence>
+                <m.div
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full"
+                >
+                    <Image
+                        src="/images/v2_hero_new.png"
+                        alt={`${siteConfig.name} Clinic Premium Interior`}
+                        fill
+                        priority
+                        sizes="100vw"
+                        className="object-cover object-center"
+                    />
+                </m.div>
             </div>
 
             {/* ── Overlays for text legibility ── */}
@@ -80,7 +61,7 @@ export default function Hero() {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent" />
                             </span>
-                            Wink Eye Care & Optical
+                            {siteConfig.name}
                         </span>
                     </m.div>
 
@@ -108,7 +89,7 @@ export default function Hero() {
                         className="text-sm sm:text-lg md:text-2xl text-white/80 leading-relaxed font-medium mb-6 sm:mb-10"
                     >
                         Providing patients with high quality eye exams, designer eyeglasses, and contact lenses — all under one roof in{" "}
-                        <span className="text-white font-bold tracking-wide">Abington, PA.</span>
+                        <span className="text-white font-bold tracking-wide">{siteConfig.contact.address.city}, {siteConfig.contact.address.state}.</span>
                     </m.p>
 
                     {/* CTA Buttons */}
@@ -120,7 +101,7 @@ export default function Hero() {
                         className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 relative z-50"
                     >
                         <MagneticButton
-                            href="https://calendar.app.google/Ke2Rg6r8pgH8d5MCA"
+                            href={siteConfig.links.booking}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group relative flex items-center justify-center gap-2.5 bg-white text-primary-900 px-6 sm:px-10 py-3.5 sm:py-5 rounded-full font-bold text-[14px] sm:text-[16px] shadow-[0_4px_20px_rgba(255,255,255,0.3)] hover:shadow-[0_8px_30px_rgba(255,255,255,0.4)] overflow-hidden w-full sm:w-auto"
@@ -131,30 +112,18 @@ export default function Hero() {
                         </MagneticButton>
 
                         <MagneticButton
-                            href="tel:215-935-6320"
+                            href={`tel:${siteConfig.contact.phone.replace(/-/g, '')}`}
                             className="group flex items-center justify-center gap-2.5 bg-white/10 backdrop-blur-md border border-white/30 text-white px-6 sm:px-10 py-3.5 sm:py-5 rounded-full font-bold text-[14px] sm:text-[16px] hover:bg-white/20 w-full sm:w-auto"
                         >
                             <Phone size={20} className="text-white/80 group-hover:animate-bounce" />
-                            <span>215-935-6320</span>
+                            <span>{siteConfig.contact.phone}</span>
                         </MagneticButton>
                     </m.div>
                 </div>
             </div>
 
-            {/* ── Bottom Controls: Dots & Scroll ── */}
+            {/* ── Bottom Controls: Scroll ── */}
             <div className="absolute z-20 bottom-6 sm:bottom-16 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 sm:gap-8 pb-2">
-                {/* Slider Navigation Dots */}
-                <div className="flex items-center gap-3">
-                    {images.map((_, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => setCurrentImg(idx)}
-                            className={`transition-all duration-500 rounded-full h-2 ${idx === currentImg ? "w-8 bg-accent" : "w-2 bg-white/40 hover:bg-white/70"
-                                }`}
-                            aria-label={`Go to slide ${idx + 1}`}
-                        />
-                    ))}
-                </div>
 
                 {/* Scroll Indicator */}
                 <m.div

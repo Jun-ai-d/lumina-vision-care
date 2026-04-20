@@ -5,14 +5,14 @@ import Image from "next/image";
 import { FocusReveal } from "./FocusReveal";
 
 const servicesList = [
-    { title: "Routine Eye Exams", icon: "routine_exam.png", desc: "Thorough, comprehensive eye exams for the whole family using the latest diagnostic technology." },
-    { title: "Contact Lenses", icon: "contact_lenses.png", desc: "Expert fitting and prescription for all types of contact lenses, including specialty designs." },
-    { title: "Myopia Management", icon: "myopic-management.png", desc: "Advanced treatments to slow myopia progression in children and young adults." },
-    { title: "Glaucoma Testing", icon: "coma.png", desc: "Early detection and ongoing management of glaucoma with cutting-edge imaging." },
-    { title: "Retinal Imaging", icon: "retinal_macular_imaging.png", desc: "High-definition digital scans to monitor retinal health and detect conditions early." },
-    { title: "Dry Eye Therapy", icon: "dry-eye-therapy-img.png", desc: "Personalized treatment plans to relieve chronic dry eye discomfort and symptoms." },
-    { title: "Designer Frames", icon: "design_frame.png", desc: "Handpicked collection of premium designer frames from top fashion brands." },
-    { title: "Sunglasses", icon: "sunglass.png", desc: "Protect your eyes in style with our curated selection of prescription and non-prescription sunglasses." },
+    { title: "Routine Eye Exams", icon: "v2_routine_exam.png", desc: "Thorough, comprehensive eye exams for the whole family using the latest diagnostic technology." },
+    { title: "Contact Lenses", icon: "v2_contact_lenses.png", desc: "Expert fitting and prescription for all types of contact lenses, including specialty designs." },
+    { title: "Myopia Management", icon: "v2_myopia_management.png", desc: "Advanced treatments to slow myopia progression in children and young adults." },
+    { title: "Glaucoma Testing", icon: "v2_glaucoma.png", desc: "Early detection and ongoing management of glaucoma with cutting-edge imaging." },
+    { title: "Retinal Imaging", icon: "v2_retinal.png", desc: "High-definition digital scans to monitor retinal health and detect conditions early." },
+    { title: "Dry Eye Therapy", icon: "v2_dry_eye.png", desc: "Personalized treatment plans to relieve chronic dry eye discomfort and symptoms." },
+    { title: "Designer Frames", icon: "v2_design_frame.png", desc: "Handpicked collection of premium designer frames from top fashion brands." },
+    { title: "Sunglasses", icon: "v2_sunglass.png", desc: "Protect your eyes in style with our curated selection of prescription and non-prescription sunglasses." },
 ];
 
 export default function ServicesGrid() {

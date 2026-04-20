@@ -19,14 +19,15 @@ const playfair = Playfair_Display({
 import { LocalBusinessSchema } from "@/components/Schema";
 import { MotionProvider } from "@/components/MotionProvider";
 import { EyeCursor } from "@/components/EyeCursor";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Wink Eye Care & Optical | Comprehensive Eye Care in Abington, PA",
-  description: "Providing patients with high quality eye exams, designer eyeglasses, and contact lenses in Abington, PA. Award-winning optometrist Dr. Minal Patel.",
-  metadataBase: new URL("https://www.winkeyecareoptical.com"),
+  title: `${siteConfig.name} | Comprehensive Eye Care`,
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
-    title: "Wink Eye Care & Optical | Comprehensive Eye Care in Abington, PA",
-    description: "Providing patients with high quality eye exams, designer eyeglasses, and contact lenses in Abington, PA.",
+    title: `${siteConfig.name} | Comprehensive Eye Care & Optical`,
+    description: siteConfig.description,
     type: "website",
     locale: "en_US",
   },

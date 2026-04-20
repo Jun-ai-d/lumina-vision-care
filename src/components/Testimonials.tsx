@@ -4,18 +4,19 @@ import { useState, useEffect, useCallback } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { FocusReveal } from "./FocusReveal";
+import { siteConfig } from "@/config/site";
 
 const reviews = [
-    { name: "Jessica", text: "My appointment with Dr. Patel was the best eye experience I've had in years! The staff are professional, very sweet, and knowledgeable." },
-    { name: "Gennyliz", text: "I needed an emergency eye exam and Dr. Minal Patel was able to see me immediately. She was amazing and knew exactly what she was doing!" },
-    { name: "Maria S.", text: "Dr. Patel is so thorough and patient. She took the time to explain everything about my eye health. The best optometrist I've ever visited." },
-    { name: "David K.", text: "Wonderful experience from start to finish. The office is modern, clean, and the frame selection is fantastic. Highly recommend!" },
-    { name: "Sarah M.", text: "She is the best eye doctor I've been to. She's very good at patiently and kindly explaining any concerns that you have." },
-    { name: "Priya R.", text: "Excellent care for the whole family. Dr. Patel diagnosed my son's myopia early and started a management plan. We are so grateful!" },
-    { name: "Tom W.", text: "The staff is incredibly friendly and the technology here is top-notch. My exam was quick and thorough — couldn't ask for more." },
-    { name: "Michelle L.", text: "I love the designer frame selection here! Dr. Patel helped me pick the perfect pair. My vision has never been better!" },
-    { name: "James C.", text: "After years of dry eye discomfort, Dr. Patel created a treatment plan that actually works. Life-changing results. Thank you!" },
-    { name: "Amanda H.", text: "As someone who wears specialty contacts, I appreciate Dr. Patel's expertise in fitting. She got it right on the first try!" },
+    { name: "Emily R.", text: `My appointment with ${siteConfig.doctor.name} was the best eye experience I've had in years! The staff are professional, very sweet, and knowledgeable.` },
+    { name: "Michael B.", text: `I needed an emergency eye exam and ${siteConfig.doctor.name} was able to see me immediately. She was amazing and knew exactly what she was doing!` },
+    { name: "Sophia L.", text: `The doctor is so thorough and patient. She took the time to explain everything about my eye health. The best optometrist I've ever visited.` },
+    { name: "Daniel K.", text: "Wonderful experience from start to finish. The office is modern, clean, and the frame selection is fantastic. Highly recommend!" },
+    { name: "Olivia M.", text: "She is the best eye doctor I've been to. She's very good at patiently and kindly explaining any concerns that you have." },
+    { name: "Liam P.", text: "Excellent care for the whole family. The team diagnosed my son's myopia early and started a management plan. We are so grateful!" },
+    { name: "Ethan W.", text: "The staff is incredibly friendly and the technology here is top-notch. My exam was quick and thorough — couldn't ask for more." },
+    { name: "Ava J.", text: "I love the designer frame selection here! The Optician helped me pick the perfect pair. My vision has never been better!" },
+    { name: "Isabella S.", text: "After years of dry eye discomfort, the clinic created a treatment plan that actually works. Life-changing results. Thank you!" },
+    { name: "Noah H.", text: `As someone who wears specialty contacts, I appreciate ${siteConfig.doctor.name}'s expertise in fitting. She got it right on the first try!` },
 ];
 
 function useSlidesPerView() {
@@ -79,7 +80,7 @@ export default function Testimonials() {
                         <span className="text-gradient-primary">Say</span>
                     </h2>
                     <p className="text-lg text-text-muted">
-                        ⭐ 4.8 Average Rating on Google — trusted by families across Abington.
+                        ⭐ 4.8 Average Rating on Google — trusted by families.
                     </p>
                 </FocusReveal>
 

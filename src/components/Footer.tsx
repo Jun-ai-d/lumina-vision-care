@@ -1,7 +1,8 @@
-import { Eye, Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
+import { MapPin, Mail, Phone, Instagram, Facebook, Eye } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { MagneticButton } from "./MagneticButton";
+import { siteConfig } from "@/config/site";
 
 export default function Footer() {
     return (
@@ -20,8 +21,8 @@ export default function Footer() {
                     {/* Background image — visible and prominent */}
                     <div className="absolute inset-0">
                         <Image
-                            src="/images/dr-patel-slit-lamp.png"
-                            alt="Dr. Patel performing eye examination"
+                            src="/images/v2_doctor_portrait_alt.png"
+                            alt="Doctor performing eye examination"
                             fill
                             sizes="100vw"
                             className="object-cover object-[center_35%]"
@@ -37,7 +38,7 @@ export default function Footer() {
                         </div>
                         <div className="shrink-0 mt-2">
                             <MagneticButton
-                                href="https://calendar.app.google/Ke2Rg6r8pgH8d5MCA"
+                                href={siteConfig.links.booking}
                                 className="inline-block px-8 sm:px-12 py-4 sm:py-6 text-base sm:text-lg bg-white text-primary-900 font-bold rounded-full hover:bg-primary-50 shadow-xl hover:shadow-2xl duration-300"
                                 target="_blank" rel="noopener noreferrer"
                             >
@@ -53,12 +54,12 @@ export default function Footer() {
                     {/* Brand Col — no white background */}
                     <div className="space-y-6">
                         <div className="inline-block">
-                            <span className="text-3xl font-serif font-extrabold text-white tracking-tight">
-                                wink <span className="text-accent italic font-light font-sans text-2xl tracking-normal">eye care</span>
+                            <span className="text-2xl sm:text-3xl font-serif font-extrabold text-white tracking-tight">
+                                {siteConfig.name.split(" ")[0].toLowerCase()} <span className="text-accent italic font-light font-sans text-xl sm:text-2xl tracking-normal">{siteConfig.name.split(" ").slice(1).join(" ").toLowerCase()}</span>
                             </span>
                         </div>
                         <p className="leading-relaxed text-sm max-w-sm">
-                            Comprehensive eye care in Abington, PA. Providing patients with high quality eye exams, eyeglasses, and contact lenses.
+                            {siteConfig.description}
                         </p>
                         <div className="flex gap-3 pt-2">
                             <a href="#" className="w-10 h-10 rounded-xl glass-card-dark flex items-center justify-center hover:bg-accent hover:text-white transition-all duration-300 text-white/60 hover:scale-110">
@@ -76,7 +77,7 @@ export default function Footer() {
                         <ul className="space-y-3.5 text-sm font-medium">
                             {[
                                 { href: "#home", label: "Home" },
-                                { href: "#ourdoctor", label: "About Dr. Patel" },
+                                { href: "#ourdoctor", label: "About Our Doctor" },
                                 { href: "#designbrand", label: "Designer Brands" },
                                 { href: "#storeinfo", label: "Office Information" },
                             ].map((link, i) => (
@@ -116,19 +117,19 @@ export default function Footer() {
                                 <div className="w-8 h-8 rounded-lg bg-accent/15 flex items-center justify-center text-accent shrink-0 mt-0.5">
                                     <MapPin size={15} />
                                 </div>
-                                <span className="group-hover:text-white transition-colors">1151 Old York Rd #103<br />Abington PA 19001</span>
+                                <span className="group-hover:text-white transition-colors">{siteConfig.contact.address.street}<br />{siteConfig.contact.address.city}, {siteConfig.contact.address.state} {siteConfig.contact.address.zip}</span>
                             </li>
                             <li className="flex gap-3 items-center group">
                                 <div className="w-8 h-8 rounded-lg bg-accent/15 flex items-center justify-center text-accent shrink-0">
                                     <Phone size={15} />
                                 </div>
-                                <a href="tel:215-935-6320" className="group-hover:text-white transition-colors">215-935-6320</a>
+                                <a href={`tel:${siteConfig.contact.phone.replace(/-/g, '')}`} className="group-hover:text-white transition-colors">{siteConfig.contact.phone}</a>
                             </li>
                             <li className="flex gap-3 items-center group">
                                 <div className="w-8 h-8 rounded-lg bg-accent/15 flex items-center justify-center text-accent shrink-0">
                                     <Mail size={15} />
                                 </div>
-                                <a href="mailto:winkeyecare20@gmail.com" className="group-hover:text-white transition-colors">winkeyecare20@gmail.com</a>
+                                <a href={`mailto:${siteConfig.contact.email}`} className="group-hover:text-white transition-colors">{siteConfig.contact.email}</a>
                             </li>
                         </ul>
                     </div>
@@ -136,7 +137,7 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-white/30">
-                    <p>© {new Date().getFullYear()} Wink Eye Care & Optical. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
                     <p className="flex items-center gap-2"><Eye size={14} className="text-primary-400/50" /> Participating provider in most insurance plans.</p>
                 </div>
             </div>
